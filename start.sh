@@ -1,0 +1,1 @@
+java -jar jars/selenium-server-4.27.0.jar standalone & python3 src/main.py
