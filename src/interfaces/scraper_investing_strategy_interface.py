@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 
-class ScraperSI(ABC):
+from selenium import webdriver
+
+class ScraperInvestingSI(ABC):
     def __init__(self):
         self._url = None
 
@@ -14,6 +16,6 @@ class ScraperSI(ABC):
         self._url = endpoint
 
     @abstractmethod
-    def get_data(self) -> List[Dict[str, Any]]:
+    def get_data(self, driver: webdriver.Remote) -> List[Dict[str, Any]]:
         pass
 

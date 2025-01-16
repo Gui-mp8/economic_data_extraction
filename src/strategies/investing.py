@@ -1,25 +1,11 @@
 import json
 
-from interfaces.scraper_strategy_interface import ScraperSI
+from interfaces.scraper_investing_strategy_interface import ScraperInvestingSI
 
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
 
-class BloombergCommodityStrategy(ScraperSI):
-    def selenium_instance(self):
-
-        options = Options()
-        driver = webdriver.Remote(
-            command_executor="http://172.17.0.1:4444",
-            options=options
-        )
-        driver.get("https://www.investing.com")
-        WebDriverWait(driver, 20).until(EC.url_contains("investing.com"))
-        return driver
-
-    def get_data(self):
+class InvestingStrategy(ScraperInvestingSI):
+    def get_data(self, driver: webdriver.Remote) -> None:
 
         script = f"""
         return fetch('{self.url}', {{
@@ -42,7 +28,6 @@ class BloombergCommodityStrategy(ScraperSI):
         .then(data => JSON.stringify(data))
         .catch((error) => JSON.stringify({{"error": error.message}}));
         """
-        driver = self.selenium_instance()
         try:
             data = json.loads(driver.execute_script(script))
         finally:
