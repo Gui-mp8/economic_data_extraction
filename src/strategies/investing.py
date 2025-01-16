@@ -35,20 +35,8 @@ class InvestingStrategy(ScraperInvestingSI):
 
         if "data" in data:
             print(data)
-        #     df = pd.DataFrame(data['data'])
-
-        #     colunas_relevantes = {
-        #         'rowDate': 'date',
-        #         'last_close': 'close',
-        #         'last_open': 'open',
-        #         'last_max': 'high',
-        #         'last_min': 'low',
-        #         'volume': 'volume'
-        #     }
-
-        #     df_filtrado = df[list(colunas_relevantes.keys())].rename(columns=colunas_relevantes)
-
-        #     df_filtrado.to_csv('bloomberg.csv', index=False)
-        #     print("Dados filtrados e salvos com sucesso.")
-        # else:
-        #     print("Erro: Dados não encontrados.")
+            # Write the fetched data to output.json
+            with open("output.json", "w") as outfile:
+                json.dump(data, outfile, indent=4)
+        else:
+            print("Expected key 'data' not found in the response.")
