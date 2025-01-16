@@ -1,15 +1,13 @@
 import json
-from datetime import datetime
 
-# from interfaces.scraper_strategy_interface import ScraperSI
+from interfaces.scraper_strategy_interface import ScraperSI
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-# import pandas as pd
 
-class BloombergCommodityStrategy():
+class BloombergCommodityStrategy(ScraperSI):
     def selenium_instance(self):
 
         options = Options()
@@ -22,11 +20,9 @@ class BloombergCommodityStrategy():
         return driver
 
     def get_data(self):
-        today = datetime.now().strftime('%Y-%m-%d')
 
-        print("Getting data")
         script = f"""
-        return fetch("https://api.investing.com/api/financialdata/historical/2111?start-date=1991-01-01&end-date={today}&time-frame=Monthly&add-missing-rows=false", {{
+        return fetch('{self.url}', {{
             method: "GET",
             headers: {{
                 "accept": "*/*",
@@ -71,4 +67,3 @@ class BloombergCommodityStrategy():
         #     print("Dados filtrados e salvos com sucesso.")
         # else:
         #     print("Erro: Dados não encontrados.")
-
