@@ -1,11 +1,27 @@
+from typing import List, Dict, Any
 import json
 
-from interfaces.scraper_investing_strategy_interface import ScraperInvestingSI
+from interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
 
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
-class InvestingStrategy(ScraperInvestingSI):
-    def get_data(self, driver: webdriver.Remote) -> None:
+class SeleniumInvestingStrategy(SeleniumInvestingSI):
+
+    def _get_remote_webdriver(self) -> webdriver.Remote:
+        options = Options()
+        driver = webdriver.Remote(
+            command_executor="http://172.17.0.1:4444",
+            options=options
+        )
+        driver.get("https://www.investing.com")
+        WebDriverWait(driver, 20).until(EC.url_contains("investing.com"))
+
+        return driver
+
+    def get_data(self) -> List[Dict[str, Any]]:
 
         script = f"""
         return fetch('{self.url}', {{
@@ -29,14 +45,12 @@ class InvestingStrategy(ScraperInvestingSI):
         .catch((error) => JSON.stringify({{"error": error.message}}));
         """
         try:
-            data = json.loads(driver.execute_script(script))
+            driver = self._get_remote_webdriver()
+            json_data = json.loads(driver.execute_script(script))
         finally:
             driver.quit()
 
-        if "data" in data:
-            print(data)
-            # Write the fetched data to output.json
-            with open("output.json", "w") as outfile:
-                json.dump(data, outfile, indent=4)
+        if "data" in json_data:
+            return json_data["data"]
         else:
             print("Expected key 'data' not found in the response.")

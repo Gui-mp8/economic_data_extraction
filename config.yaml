@@ -1,0 +1,4 @@
+project_id: suzano-challenge
+service:
+  cloud_storage:
+    bucket_name: suzano_challenge_test
