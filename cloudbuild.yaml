@@ -39,7 +39,7 @@ steps:
     -  '-c'
     -  |
         if [[ "$BRANCH_NAME" != "main" ]]; then
-          terraform apply -auto-approve -var="branch_name=$BRANCH_NAME"
+          terraform apply -auto-approve
         else
           exit 0
         fi
