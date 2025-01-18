@@ -2,6 +2,8 @@ steps:
   - id: 'branch name'
     name: 'alpine'
     entrypoint: 'sh'
+    dir: 'terraform'
+
     # env:
     #   - 'BRANCH_NAME=${_BRANCH_NAME}'
     args:
@@ -12,6 +14,7 @@ steps:
   - id: 'tf init'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
+    dir: 'terraform'
     args:
     -  '-c'
     -  |
@@ -20,6 +23,7 @@ steps:
   - id: 'tf plan'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
+    dir: 'terraform'
     args:
     -  '-c'
     -  |
@@ -30,6 +34,7 @@ steps:
     # env:
     #   - 'BRANCH_NAME=${_BRANCH_NAME}'
     entrypoint: 'sh'
+    dir: 'terraform'
     args:
     -  '-c'
     -  |
