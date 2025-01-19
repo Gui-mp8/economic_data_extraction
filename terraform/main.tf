@@ -9,16 +9,21 @@
 # }
 
 # provider "google" {
-#   credentials = file("./suzano-challenge.json")
-#   project     = "suzano-challenge"
+#   project     = "suzano-challenge-teste1"
 #   region      = "us-central1"  # choose your region
 # }
 
-resource "google_storage_bucket" "auto-expire" {
-  name          = "tf-suzano-challenge-bucket"
-  location      = "US"
-  force_destroy = true
-  project       = "suzano-challenge-teste1"
+# resource "google_storage_bucket" "auto-expire" {
+#   name          = "tf-suzano-challenge-bucket-teste"
+#   location      = "US"
+#   force_destroy = true
+#   project       = "suzano-challenge-teste1"
+#   public_access_prevention = "enforced"
+# }
 
-  public_access_prevention = "enforced"
+resource "google_artifact_registry_repository" "suzano" {
+  location      = "us-central1"
+  repository_id = "suzano"
+  description   = "docker repository"
+  format        = "DOCKER"
 }
