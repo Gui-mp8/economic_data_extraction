@@ -1,4 +1,4 @@
-project_id: suzano-challenge
+project_id: suzano-challenge-teste1
 service:
   cloud_storage:
-    bucket_name: suzano_challenge_test
+    bucket_name: tf-suzano-challenge-bucket
