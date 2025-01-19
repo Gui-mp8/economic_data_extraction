@@ -4,7 +4,7 @@ FROM python:3.12
 # Set the working directory in the container
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 443
+EXPOSE 4444
 # Copy the requirements.txt file to the container
 COPY requirements.txt .
 
