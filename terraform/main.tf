@@ -15,7 +15,7 @@
 # }
 
 resource "google_storage_bucket" "auto-expire" {
-  name          = "tf-suzano-challenge-bucket"
+  name          = "tf-suzano-challenge-bucket-teste"
   location      = "US"
   force_destroy = true
   project       = "suzano-challenge-teste1"
