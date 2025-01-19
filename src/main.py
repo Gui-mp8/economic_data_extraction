@@ -26,4 +26,3 @@ if __name__ == "__main__":
     # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./suzano-challenge.json"
     config = load_config()
     main(config)
-
