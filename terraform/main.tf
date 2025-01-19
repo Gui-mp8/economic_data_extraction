@@ -21,9 +21,9 @@ resource "google_storage_bucket" "auto-expire" {
   public_access_prevention = "enforced"
 }
 
-resource "google_artifact_registry_repository" "my_repository" {
-  name     = "suzano"
-  location = "us-central1"
-  format   = "DOCKER"
-  project  = "suzano-challenge-teste1"
+resource "google_artifact_registry_repository" "my-repo" {
+  location      = "us-central1"
+  repository_id = "suzano"
+  description   = "docker repository"
+  format        = "DOCKER"
 }
