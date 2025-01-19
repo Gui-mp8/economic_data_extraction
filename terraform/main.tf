@@ -9,8 +9,7 @@
 # }
 
 # provider "google" {
-#   credentials = file("./suzano-challenge.json")
-#   project     = "suzano-challenge"
+#   project     = "suzano-challenge-teste1"
 #   region      = "us-central1"  # choose your region
 # }
 
@@ -19,6 +18,12 @@ resource "google_storage_bucket" "auto-expire" {
   location      = "US"
   force_destroy = true
   project       = "suzano-challenge-teste1"
-
   public_access_prevention = "enforced"
+}
+
+resource "google_artifact_registry_repository" "my_repository" {
+  name     = "suzano"
+  location = "us-central1"
+  format   = "DOCKER"
+  project  = "suzano-challenge-teste1"
 }
