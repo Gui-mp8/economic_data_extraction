@@ -53,5 +53,5 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 
-timeout: 1200s
+timeout: 2400s
 images: [gcr.io/$PROJECT_ID/suzano/python-app-service:$COMMIT_SHA]
