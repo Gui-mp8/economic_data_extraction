@@ -21,7 +21,7 @@ resource "google_storage_bucket" "auto-expire" {
   public_access_prevention = "enforced"
 }
 
-resource "google_artifact_registry_repository" "my-repo" {
+resource "google_artifact_registry_repository" "suzano" {
   location      = "us-central1"
   repository_id = "suzano"
   description   = "docker repository"
