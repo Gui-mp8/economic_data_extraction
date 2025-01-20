@@ -19,4 +19,12 @@ resource "google_storage_bucket" "auto-expire" {
   force_destroy = true
   project       = "suzano-challenge-teste1"
   public_access_prevention = "unspecified"
+  uniform_bucket_level_access = true
+
+}
+
+resource "google_project_service" "enable_bigquery" {
+  project            = var.project_id
+  service            = "bigquery.googleapis.com"
+  disable_on_destroy = false
 }
