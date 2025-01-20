@@ -23,8 +23,8 @@ resource "google_storage_bucket" "auto-expire" {
 
 }
 
-resource "google_project_service" "enable_bigquery" {
-  project            = "tf-suzano-challenge-bucket-teste"
-  service            = "bigquery.googleapis.com"
-  disable_on_destroy = false
-}
+# resource "google_project_service" "enable_bigquery" {
+#   project            = "tf-suzano-challenge-bucket-teste"
+#   service            = "bigquery.googleapis.com"
+#   disable_on_destroy = false
+# }
