@@ -15,7 +15,7 @@ def main(config):
     bloomberg = Scraper(scraper_strategy=investing)
     bloomberg_data = bloomberg.data()
     
-    # CloudStorage(config).upload_json(bloomberg_data, "bloomberg.json")
+    CloudStorage(config).upload_json(bloomberg_data, "bloomberg.json")
 
     # investing.url = f"https://api.investing.com/api/financialdata/historical/2111?start-date=1991-01-01&end-date={today}&time-frame=Monthly&add-missing-rows=false"
     # usc_cny = Scraper(scraper_strategy=investing)
