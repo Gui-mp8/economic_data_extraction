@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.12
+FROM --platform=linux/amd64 python:3.12-slim
 
 RUN apt-get update && apt-get install -y \
     wget \
@@ -10,11 +10,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 ENV PORT=8080
 
-COPY requirements.txt .
+COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
 
 # Run the Python application
 CMD ["python", "src/main.py"]
