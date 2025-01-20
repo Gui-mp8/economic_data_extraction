@@ -1,7 +1,7 @@
 from typing import List, Dict, Any
 import json
 
-from src.interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
+from api.interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service

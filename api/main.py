@@ -1,10 +1,10 @@
 from datetime import datetime
 import os
 
-from src.utils.config import load_config
-from src.context.scraper import Scraper
-from src.strategies.selenium_investing import SeleniumInvestingStrategy
-from src.targets.cloud_storage import CloudStorage
+from api.utils.config import load_config
+from api.context.scraper import Scraper
+from api.strategies.selenium_investing import SeleniumInvestingStrategy
+from api.targets.cloud_storage import CloudStorage
 
 from fastapi import FastAPI, APIRouter, Depends
 

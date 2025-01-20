@@ -1,4 +1,4 @@
-from src.interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
+from api.interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
 
 class Scraper:
     def __init__(self, scraper_strategy: SeleniumInvestingSI):
