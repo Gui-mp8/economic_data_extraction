@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     chromium-driver
 
 WORKDIR /app
-EXPOSE 8080
+ENV PORT=8080
 
 COPY requirements.txt .
 
