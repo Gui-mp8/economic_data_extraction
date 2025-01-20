@@ -1,22 +1,35 @@
 from datetime import datetime
 import os
 
-from utils.config import load_config
-from context.scraper import Scraper
-from strategies.selenium_investing import SeleniumInvestingStrategy
-from targets.cloud_storage import CloudStorage
+from src.utils.config import load_config
+from src.context.scraper import Scraper
+from src.strategies.selenium_investing import SeleniumInvestingStrategy
+from src.targets.cloud_storage import CloudStorage
 
-from fastapi import FastAPI,APIRouter, Depends
+from fastapi import FastAPI, APIRouter, Depends
 
 scraper = APIRouter()
 
 @scraper.get("/")
 def root():
-    return {"message": "Hello World"}
+    config = load_config()
+
+    today = datetime.now().strftime('%Y-%m-%d')
+
+    investing = SeleniumInvestingStrategy()
+
+    investing.url = f"https://api.investing.com/api/financialdata/historical/948434?start-date=1991-01-01&end-date={today}&time-frame=Monthly&add-missing-rows=false"
+    bloomberg = Scraper(scraper_strategy=investing)
+    bloomberg_data = bloomberg.data()
+    # CloudStorage(config).upload_json(bloomberg_data, "bloomberg.json")
+
+    return {"bloomberg": bloomberg_data}
 
 app = FastAPI()
 
-app.include_router(scraper)
+# Include the scraper router with a prefix
+app.include_router(scraper, prefix="/scraper")
+
 
     # config = load_config()
     # print("Hello World")
