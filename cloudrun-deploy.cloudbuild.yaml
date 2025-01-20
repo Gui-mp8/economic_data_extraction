@@ -2,8 +2,6 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - build
-      - '--platform'
-      - 'linux/amd64'
       - '-t'
       - 'gcr.io/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
       - .
@@ -17,7 +15,6 @@ steps:
     entrypoint: gcloud
     args:
       - run
-      - jobs
       - deploy
       - $_SERVICE_NAME
       - '--image'
@@ -26,6 +23,9 @@ steps:
       - 'us-central1'
       - '--platform'
       - 'managed'
+      - '--port'
+      - '8000'
+      - '--allow-unauthenticated'
 
 images:
   - 'gcr.io/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
