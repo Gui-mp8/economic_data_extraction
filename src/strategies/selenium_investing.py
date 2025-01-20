@@ -4,21 +4,37 @@ import json
 from interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
 
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
 
 class SeleniumInvestingStrategy(SeleniumInvestingSI):
 
-    def _get_remote_webdriver(self) -> webdriver.Remote:
-        options = Options()
-        driver = webdriver.Remote(
-            command_executor="http://172.17.0.1:4444",
-            options=options
+    def _setup_driver(self):
+        # Configurar opções para o Chrome
+        chrome_options = Options()
+        chrome_options.add_argument("--headless=new")  # Novo modo headless
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument("--remote-debugging-port=9222")
+        chrome_options.add_argument(
+            "--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            # "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         )
-        driver.get("https://www.investing.com")
-        WebDriverWait(driver, 20).until(EC.url_contains("investing.com"))
 
+        # Inicializar o WebDriver
+        driver = webdriver.Chrome(
+            service=Service(
+                ChromeDriverManager(driver_version="132.0.6834.83").install()
+            ),  # driver_version="132.0.6834.83"
+            options=chrome_options,
+        )
         return driver
 
     def get_data(self) -> List[Dict[str, Any]]:
@@ -45,7 +61,7 @@ class SeleniumInvestingStrategy(SeleniumInvestingSI):
         .catch((error) => JSON.stringify({{"error": error.message}}));
         """
         try:
-            driver = self._get_remote_webdriver()
+            driver = self._setup_driver()
             json_data = json.loads(driver.execute_script(script))
         finally:
             driver.quit()

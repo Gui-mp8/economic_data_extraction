@@ -1,7 +1,9 @@
 steps:
   - name: gcr.io/cloud-builders/docker
-    args: 
+    args:
       - build
+      - '--platform'
+      - 'linux/amd64'
       - '-t'
       - 'gcr.io/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
       - .
@@ -26,8 +28,6 @@ steps:
       - '--port'
       - '8080'
       - '--allow-unauthenticated'
-
-# timeout: 1200s
 
 images:
   - '$_AR_HOSTNAME/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'
