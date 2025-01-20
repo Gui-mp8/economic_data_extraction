@@ -21,9 +21,9 @@ def root():
     investing.url = f"https://api.investing.com/api/financialdata/historical/948434?start-date=1991-01-01&end-date={today}&time-frame=Monthly&add-missing-rows=false"
     bloomberg = Scraper(scraper_strategy=investing)
     bloomberg_data = bloomberg.data()
-    # CloudStorage(config).upload_json(bloomberg_data, "bloomberg.json")
+    CloudStorage(config).upload_json(bloomberg_data, "bloomberg.json")
 
-    return {"bloomberg": bloomberg_data}
+    return {"text": "Data saved at Storage"}
 
 app = FastAPI()
 
