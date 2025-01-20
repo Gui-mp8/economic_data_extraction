@@ -17,7 +17,6 @@ steps:
     entrypoint: gcloud
     args:
       - run
-      - jobs
       - deploy
       - $_SERVICE_NAME
       - '--image'
@@ -26,6 +25,9 @@ steps:
       - 'us-central1'
       - '--platform'
       - 'managed'
+      - '--port'
+      - '8080'
+      - '--allow-unauthenticated'
 
 images:
   - 'gcr.io/$PROJECT_ID/$_AR_REPO/$_SERVICE_NAME:$COMMIT_SHA'

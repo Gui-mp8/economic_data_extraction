@@ -6,9 +6,20 @@ from context.scraper import Scraper
 from strategies.selenium_investing import SeleniumInvestingStrategy
 from targets.cloud_storage import CloudStorage
 
-def main(config):
-    
-    print("Hello World")
+from fastapi import FastAPI,APIRouter, Depends
+
+scraper = APIRouter()
+
+@scraper.get("/")
+def root():
+    return {"message": "Hello World"}
+
+app = FastAPI()
+
+app.include_router(scraper)
+
+    # config = load_config()
+    # print("Hello World")
     
     # today = datetime.now().strftime('%Y-%m-%d')
 
@@ -25,8 +36,8 @@ def main(config):
     # usc_cny_data = usc_cny.data()
     # CloudStorage(config).upload_json(usc_cny_data, "usc_cny.json")
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./suzano-challenge.json"
-    config = load_config()
-    main(config)
+    # config = load_config()
+    # main(config)
 
