@@ -13,17 +13,10 @@
 #   region      = "us-central1"  # choose your region
 # }
 
-# resource "google_storage_bucket" "auto-expire" {
-#   name          = "tf-suzano-challenge-bucket-teste"
-#   location      = "US"
-#   force_destroy = true
-#   project       = "suzano-challenge-teste1"
-#   public_access_prevention = "enforced"
-# }
-
-resource "google_artifact_registry_repository" "suzano" {
+resource "google_storage_bucket" "auto-expire" {
+  name          = "tf-suzano-challenge-bucket-teste"
   location      = "us-central1"
-  repository_id = "suzano"
-  description   = "docker repository"
-  format        = "DOCKER"
+  force_destroy = true
+  project       = "suzano-challenge-teste1"
+  public_access_prevention = "unspecified"
 }
