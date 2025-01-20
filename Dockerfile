@@ -10,11 +10,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 ENV PORT=8080
 
-COPY requirements.txt .
+COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
 
 # Run the Python application
 CMD ["python", "src/main.py"]
