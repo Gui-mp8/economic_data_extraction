@@ -20,4 +20,3 @@ resource "google_storage_bucket" "auto-expire" {
   project       = "suzano-challenge-teste1"
   public_access_prevention = "unspecified"
 }
-
