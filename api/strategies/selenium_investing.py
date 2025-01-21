@@ -2,6 +2,8 @@ from typing import List, Dict, Any
 import json
 
 from api.interfaces.investing_strategy_interface import InvestingSI
+from api.contracts.bloomberg_schema import BloombergSchema
+from api.contracts.usd_cny_schema import UsdCnySchema
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -10,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 class SeleniumInvestingStrategy(InvestingSI):
 
-    def _setup_driver(self):
+    def _setup_driver(self) -> webdriver.Chrome:
         # Configurar opções para o Chrome
         chrome_options = Options()
         chrome_options.add_argument("--headless=new")  # Novo modo headless
@@ -33,7 +35,7 @@ class SeleniumInvestingStrategy(InvestingSI):
         )
         return driver
 
-    def get_data(self) -> List[Dict[str, Any]]:
+    def get_data(self, contract: str) -> List[Dict[str, Any]]:
 
         script = f"""
         return fetch('{self.url}', {{
@@ -62,7 +64,32 @@ class SeleniumInvestingStrategy(InvestingSI):
         finally:
             driver.quit()
 
+        validated_data = []
+
         if "data" in json_data:
-            return json_data["data"]
+            for item in json_data["data"]:
+                if contract == "bloomberg":
+                    contract_data = BloombergSchema(
+                        date    = item.get("rowDateTimestamp", ""),
+                        close   = item.get("last_close", ""),
+                        open    = item.get("last_open", ""),
+                        high    = item.get("last_max", ""),
+                        low     = item.get("last_min", ""),
+                        volume  = item.get("volumeRaw", "")
+                    )
+
+                if contract == "usd_cny":
+                    contract_data = UsdCnySchema(
+                        date    = item.get("rowDateTimestamp", ""),
+                        close   = item.get("last_close", ""),
+                        open    = item.get("last_open", ""),
+                        high    = item.get("last_max", ""),
+                        low     = item.get("last_min", ""),
+                        volume  = item.get("volumeRaw", "")
+                    )
+
+                validated_data.append(contract_data.model_dump())
+
+            return validated_data
         else:
             print("Expected key 'data' not found in the response.")
