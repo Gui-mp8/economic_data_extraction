@@ -14,6 +14,6 @@ class InvestingSI(ABC):
         self._url = endpoint
 
     @abstractmethod
-    def get_data(self) -> List[Dict[str, Any]]:
+    def get_data(self, contract: str) -> List[Dict[str, Any]]:
         pass
 

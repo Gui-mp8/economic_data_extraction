@@ -1,14 +1,31 @@
 from typing import List, Dict, Any
 
 from api.interfaces.investing_strategy_interface import InvestingSI
+from api.contracts.china_index_schema import ChinaIndexSchema
 
 import requests
-
 class RequestsInvestingStrategy(InvestingSI):
 
-    def get_data(self) -> List[Dict[str, Any]]:
-        # url = "https://sbcharts.investing.com/events_charts/eu/596.json"
+    def get_data(self, contract: str) -> List[Dict[str, Any]]:
         response = requests.get(self.url)
         if response.status_code == 200:
             data = response.json()
-            return data
+
+            validated_data = []
+
+            if "attr" in data:
+                for item in data["attr"]:
+
+                    if contract == "china_index":
+                        contract_data = ChinaIndexSchema(
+                            date=item.get("timestamp", ""),
+                            actual_state=item.get("actual_state", ""),
+                            close=item.get("actual_formatted", ""),
+                            forecast=item.get("forecast_formatted", ""),
+                        )
+
+                    validated_data.append(contract_data.model_dump())
+
+                return validated_data
+        else:
+            print("Expected key 'data' not found in the response.")
