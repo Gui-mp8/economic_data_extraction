@@ -1,5 +1,5 @@
 resource "google_cloudbuild_trigger" "build-trigger" {
-    name = "my-trigger"
+    name = "cloud-run-terraform-deploy"
     location = "global"
     service_account = var.service_account
     github {

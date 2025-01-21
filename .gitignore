@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
@@ -38,7 +37,7 @@ terraform.tfstate
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
+old/
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -173,3 +172,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+airflow/
