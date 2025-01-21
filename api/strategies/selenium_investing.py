@@ -1,14 +1,14 @@
 from typing import List, Dict, Any
 import json
 
-from api.interfaces.selenium_investing_strategy_interface import SeleniumInvestingSI
+from api.interfaces.investing_strategy_interface import InvestingSI
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-class SeleniumInvestingStrategy(SeleniumInvestingSI):
+class SeleniumInvestingStrategy(InvestingSI):
 
     def _setup_driver(self):
         # Configurar opções para o Chrome
