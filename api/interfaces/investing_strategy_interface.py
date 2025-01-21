@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 
-class SeleniumInvestingSI(ABC):
+class InvestingSI(ABC):
     def __init__(self):
         self._url = None
 
