@@ -74,6 +74,12 @@ resource "google_project_iam_member" "cloudrun_admin" {
   member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
 }
 
+resource "google_project_iam_member" "bigquery_admin" {
+  project = var.project_id
+  role    = "roles/bigquery.admin"
+  member  = "serviceAccount:${google_service_account.cloudbuild_service_account.email}"
+}
+
 module "artifact_registry" {
   source = "./artifact_registry"
   region = var.region
@@ -94,6 +100,7 @@ module "cloud_build" {
     google_project_iam_member.artifactregistry_admin,
     google_project_iam_member.cloudrun_admin,
     google_service_account.cloudbuild_service_account,
+    google_project_iam_member.bigquery_admin,
     module.artifact_registry
   ]
 }
