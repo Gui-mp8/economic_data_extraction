@@ -26,16 +26,16 @@ jobs:
         terraform_version: 1.5.5 # Replace with your required version
 
     - name: Initialize Terraform
-      run: terraform init
+      run: terraform -chdir=./terraform init
 
     - name: Validate Terraform
-      run: terraform validate
+      run: terraform -chdir=./terraform validate
 
     - name: Plan Terraform
-      run: terraform plan
+      run: terraform -chdir=./terraformplan
 
     - name: Apply Terraform
-      run: terraform apply -auto-approve
+      run: terraform -chdir=./terraform apply -auto-approve
 
     - name: Clean up Git configuration
       if: always()
