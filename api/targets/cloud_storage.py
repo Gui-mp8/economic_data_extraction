@@ -21,7 +21,7 @@ class CloudStorage:
 
             df = pd.DataFrame(data)
 
-            uri = f"gs://{self.config['bucket_name']}/{destination_blob_name}.parquet"
+            uri = f"gs://{self.config["service"]["cloud_storage"]["bucket_name"]}/{destination_blob_name}.parquet"
             df.to_parquet(uri, index=False)
 
             print(f"Table {destination_blob_name} saved on Storage!")
