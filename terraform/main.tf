@@ -118,6 +118,6 @@ module "compute_engine" {
   github_full_repo = var.github_full_repo
   project = var.project_id
   account = google_service_account.airflow_sa.email
-  depends_on = [ module.project-services ]
+  depends_on = [ module.project-services, google_service_account.airflow_sa ]
   #depends_on = [ module.cloud_build, module.artifact_registry, module.cloudstorage ]
 }
