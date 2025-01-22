@@ -18,3 +18,6 @@ infra_apply:
 
 infra_destroy:
 	terraform -chdir=./terraform destroy -auto-approve
+
+infra_compute_engine:
+	terraform -chdir=./terraform apply -target module.compute_engine

@@ -2,14 +2,14 @@ variable "project_id" {
   default = "suzano-challenge-teste1"
   type = string
 }
-variable "region" { 
+variable "region" {
   default = "us-central1"
   type = string
 }
 
 # Bucket variables
 variable "bucket_name_suzano" {
-  default = "tf-suzano-challenge-bucket-teste"
+  default = "tf-suzano-challenge"
   type = string
 }
 variable "bucket_location" {
@@ -35,5 +35,10 @@ variable "github_repo" {
 
 variable "app_name" {
   default = "economicdataextraction"
+  type = string
+}
+
+variable "github_full_repo" {
+  default = "https://github.com/Gui-mp8/economic_data_extraction"
   type = string
 }

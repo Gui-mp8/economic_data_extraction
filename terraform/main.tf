@@ -26,6 +26,7 @@ module "project-services" {
     "run.googleapis.com",
     "cloudbuild.googleapis.com",
     "servicemanagement.googleapis.com",
+    "compute.googleapis.com"
   ]
 }
 
@@ -87,12 +88,25 @@ module "cloud_build" {
   region = var.region
   service_account = google_service_account.cloudbuild_service_account.id
   artifact_registry_repository = var.artifact_registry_repository
-  depends_on = [ google_project_iam_member.act_as, 
-    google_project_iam_member.logs_writer, 
-    google_project_iam_member.artifactregistry_admin, 
-    google_project_iam_member.cloudrun_admin, 
+  depends_on = [ google_project_iam_member.act_as,
+    google_project_iam_member.logs_writer,
+    google_project_iam_member.artifactregistry_admin,
+    google_project_iam_member.cloudrun_admin,
     google_service_account.cloudbuild_service_account,
     module.artifact_registry
   ]
 }
 
+resource "google_service_account" "my_service_account" {
+  account_id   = "airflow"
+  display_name = "Airflow Service Account"
+}
+
+module "compute_engine" {
+  source = "./compute_engine"
+  github_full_repo = var.github_full_repo
+  project = var.project_id
+  account = google_service_account.my_service_account.email
+  depends_on = [ module.project-services ]
+  #depends_on = [ module.cloud_build, module.artifact_registry, module.cloudstorage ]
+}
