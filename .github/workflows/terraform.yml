@@ -1,0 +1,43 @@
+name: Terraform Init with HTTPS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  terraform-init:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: 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
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure Git to use HTTPS with GITHUB_TOKEN
+      run: |
+        git config --global url."https://oauth2:${GH_TOKEN}@github.com/Gui-mp8/economic_data_extraction.git".insteadOf "ssh://git@github.com/Gui-mp8/economic_data_extraction.git"
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.5 # Replace with your required version
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Validate Terraform
+      run: terraform validate
+
+    - name: Plan Terraform
+      run: terraform plan
+
+    - name: Apply Terraform
+      run: terraform apply -auto-approve
+
+    - name: Clean up Git configuration
+      if: always()
+      run: |
+        git config --global --remove-section url."https://oauth2:${GH_TOKEN}@github.com/Gui-mp8/economic_data_extraction.git" || true
