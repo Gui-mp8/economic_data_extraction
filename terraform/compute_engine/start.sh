@@ -14,7 +14,7 @@ done
 curl -sSL https://install.astronomer.io | sudo bash
 
 # principal folder
-cd economic_data_extraction
+cd economic_data_extraction/airflow
 
 # astro config
 
