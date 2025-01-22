@@ -1,7 +1,7 @@
 resource "google_compute_instance" "airflow" {
   name         = "ingestdata"
-  machine_type = "n1-standard-4"
-  zone         = "us-central1-a"
+  machine_type = "n2-standard-4"
+  zone         = "us-central1-f"
 
   boot_disk {
     initialize_params {

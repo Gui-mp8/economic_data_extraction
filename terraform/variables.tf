@@ -46,5 +46,6 @@ variable "github_full_repo" {
 variable "google_credentials" {
   type = string
   description = "GCP service account JSON key"
+  default = "credentials/suzano-challenge.json"
   sensitive = true
 }
