@@ -13,7 +13,7 @@ default_args = {
 }
 
 @dag(
-    "suzano_desafio",
+    "suzano_challenge",
     default_args=default_args,
     schedule_interval='0 8 * * *',
     # params=config,
