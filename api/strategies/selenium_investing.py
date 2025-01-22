@@ -94,3 +94,4 @@ class SeleniumInvestingStrategy(InvestingSI):
             return validated_data
         else:
             print("Expected key 'data' not found in the response.")
+
