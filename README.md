@@ -10,6 +10,8 @@ Before running the code, ensure you have the following tools installed:
 
 - [Google Cloud Account](https://cloud.google.com/free?hl=en)
 
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
 ## Configuration
 
 After creating the Google Cloud Account you will need pass trough some steps
@@ -19,3 +21,32 @@ After creating the Google Cloud Account you will need pass trough some steps
 - Step 2 : at terraform directory, if not created, create a directory inside of it called `credentials`, and save the service account key with the name of `suzano-challenge.json`, or change the key name.
 
 - Step 3 : Modify the file `config.yaml` at the main directory with the respective data of your project
+
+- Step 4 : install make to run Makefile's
+
+    ```
+    sudo apt -y install make
+    ```
+
+## Execution
+
+Step 1 -  Clone the repository:
+```
+git clone git@github.com:Gui-mp8/economic_data_extraction.git
+```
+
+Step 2 -  Run terraform (Run each line separately):
+```
+make infra
+make infra_plan
+make infra_apply
+```
+
+> **OBS:** Wait about 5 minutes to airflow become available
+
+Step 3 - Enter at airflow in the IP Address that'll appear at your CMD like `35.192.180.114`, and put at the url like this, `http://35.192.180.114:8081`, and then do the login using admin admin
+
+Step 4 - Run the suzano_challenge dag
+
+## Pipeline
+The DAG invoke the Cloud Run API to make the extraction with selenium and requets, and then save this data at Cloud Storage. After saving at Cloud Storage as Parquet, the DAG writes the Tables at BigQuery for the analysis.
