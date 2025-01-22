@@ -1,9 +1,11 @@
-from typing import List, Dict, Any
-
-from api.interfaces.investing_strategy_interface import InvestingSI
-from api.contracts.china_index_schema import ChinaIndexSchema
+from typing import Any, Dict, List
 
 import requests
+
+from api.contracts.china_index_schema import ChinaIndexSchema
+from api.interfaces.investing_strategy_interface import InvestingSI
+
+
 class RequestsInvestingStrategy(InvestingSI):
 
     def get_data(self, contract: str) -> List[Dict[str, Any]]:

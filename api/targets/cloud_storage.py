@@ -1,16 +1,21 @@
 import json
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
-from google.cloud import storage
 import pandas as pd
+from google.cloud import storage
+
 
 class CloudStorage:
     def __init__(self, config: dict) -> None:
         self.config = config
         self.storage = storage.Client(project=self.config["project_id"])
-        self.bucket = self.storage.bucket(self.config["service"]["cloud_storage"]["bucket_name"])
+        self.bucket = self.storage.bucket(
+            self.config["service"]["cloud_storage"]["bucket_name"]
+        )
 
-    def upload_json(self, data: List[Dict[str, Any]], destination_blob_name: str) -> None:
+    def upload_json(
+        self, data: List[Dict[str, Any]], destination_blob_name: str
+    ) -> None:
 
         if data:
 
@@ -30,4 +35,3 @@ class CloudStorage:
         # blob.upload_from_string(json_data, content_type='application/json')
 
         # print(f"Data successfully uploaded !")
-

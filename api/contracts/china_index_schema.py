@@ -1,13 +1,14 @@
-from typing import Any
 from datetime import datetime
+from typing import Any
 
 from pydantic import BaseModel, field_validator
 
+
 class ChinaIndexSchema(BaseModel):
-    date:           str | None = None
-    actual_state:   str | None = None
-    close:          str | None = None
-    forecast:       str | None = None
+    date: str | None = None
+    actual_state: str | None = None
+    close: str | None = None
+    forecast: str | None = None
 
     @field_validator("date", mode="before")
     @classmethod
