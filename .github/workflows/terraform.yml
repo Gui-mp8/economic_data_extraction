@@ -37,7 +37,7 @@ jobs:
     - name: Plan Terraform
       env:
         TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-      run: terraform -chdir=./terraformplan
+      run: terraform -chdir=./terraform plan
 
     - name: Apply Terraform
       env:
