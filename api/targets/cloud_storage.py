@@ -30,3 +30,4 @@ class CloudStorage:
         # blob.upload_from_string(json_data, content_type='application/json')
 
         # print(f"Data successfully uploaded !")
+
