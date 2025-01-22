@@ -16,7 +16,7 @@ class BigQuery:
             )
 
             load_job = self.client.load_table_from_uri(
-                source_uris = f"gs://{self.config['bucket_name']}/{table_name}.parquet",
+                source_uris = f"gs://{self.config["service"]["cloud_storage"]["bucket_name"]}/{table_name}.parquet",
                 destination = f"{self.config['project_id']}.{dataset_name}.{table_name}",
                 job_config=job_config
             )
