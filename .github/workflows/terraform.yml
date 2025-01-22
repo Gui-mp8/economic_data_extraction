@@ -10,7 +10,8 @@ jobs:
   terraform-init:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: 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
+        GH_TOKEN: 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
+        GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
     steps:
     - name: Checkout code
@@ -29,12 +30,18 @@ jobs:
       run: terraform -chdir=./terraform init
 
     - name: Validate Terraform
+      env:
+        TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       run: terraform -chdir=./terraform validate
 
     - name: Plan Terraform
+      env:
+        TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       run: terraform -chdir=./terraformplan
 
     - name: Apply Terraform
+      env:
+        TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       run: terraform -chdir=./terraform apply -auto-approve
 
     - name: Clean up Git configuration
