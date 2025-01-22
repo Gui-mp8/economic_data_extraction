@@ -17,8 +17,8 @@ curl -sSL https://install.astronomer.io | sudo bash
 cd economic_data_extraction
 
 # astro config
-sleep 10
-sudo astro config set webserver.port 8081
+# sleep 10
+# sudo astro config set webserver.port 8081
 
 sleep 10
-sudo astro dev start
+sudo astro dev start >> output_astro.txt

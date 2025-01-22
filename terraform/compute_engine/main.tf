@@ -24,14 +24,13 @@ resource "google_compute_instance" "airflow" {
   tags = ["airflow", "http-server", "https-server"]
 }
 
-
-resource "google_compute_firewall" "allow_all_8080" {
-  name    = "allow-all-8080"
+resource "google_compute_firewall" "allow_airflow" {
+  name    = "allow-airflow-webserver"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["8080"]
+    ports    = ["8081"]
   }
 
   source_ranges = ["0.0.0.0/0"]
