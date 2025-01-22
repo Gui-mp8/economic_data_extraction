@@ -3,7 +3,7 @@
 This project uses Terraform with GCP to scraps data from [Chinese Index](https://br.investing.com/economic-calendar/chinese-caixin-services-pmi-596), [Bloomberg Commodity Index](https://br.investing.com/indices/bloomberg-commodity) and [USD/CNY Index](https://br.investing.com/currencies/usd-cny) make available these 3 tables at **BigQuery** for analysis.
 
 ## Architecture
-![Image](https://github.com/user-attachments/assets/08d53b91-442d-46b4-9380-f595ccd9dffa)
+![Image](https://github.com/user-attachments/assets/de18dd4c-f2ea-4051-9f5f-e17234982cdd)
 
 ## Pipeline Details
 
@@ -61,7 +61,19 @@ make infra_apply
 
 > **OBS:** Wait about 5 minutes to airflow become available
 
-Step 3 - Enter at airflow in the IP Address that'll appear at your CMD like `35.192.180.114`, and put at the url like this, `http://35.192.180.114:8081`, and then do the login using admin admin
+Step 3 - Enter at airflow in the IP Address that'll appear at your CMD like "`35.192.180.114`", and put at the url like this, `http://35.192.180.114:8081`, and then do the login using admin admin
 
-Step 4 - Run the suzano_challenge dag
+Step 4 - It's necessary to get the Cloud Run Aplication URL, and create a [HTTP connection at Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html)
 
+Step 5 - Run the suzano_challenge dag
+
+## Improvements
+- Make the DAG more modular by better separating each function in the code.
+
+- Create a trigger at Cloud Build with terraform, to automatically update Airflow on the VM, after each commit in the dags/ and include/ folders.
+
+- Develop tests to ensure reliability.
+
+- Create a Docker container to run on Compute Engine, avoiding potential issues with updates via apt update.
+
+- Save the raw data directly to the storage and authenticate pydantic to save it to the bq (we're authenticating pydantic directly because we think we know that the API won't be changed in the future).
