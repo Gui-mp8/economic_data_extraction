@@ -2,9 +2,22 @@
 
 This project uses Terraform with GCP to scraps data from [Chinese Index](https://br.investing.com/economic-calendar/chinese-caixin-services-pmi-596), [Bloomberg Commodity Index](https://br.investing.com/indices/bloomberg-commodity) and [USD/CNY Index](https://br.investing.com/currencies/usd-cny) make available these 3 tables at **BigQuery** for analysis.
 
-## Archtecture
+## Architecture
+![Image](https://github.com/user-attachments/assets/08d53b91-442d-46b4-9380-f595ccd9dffa)
 
+## Pipeline Details
 
+**Data Extraction**:
+
+- The DAG triggers a Cloud Run API that uses Selenium and Requests to scrape the required data.
+
+**Data Storage**:
+
+- Extracted data is saved in Cloud Storage in Parquet format.
+
+**Data Analysis**:
+
+- The DAG writes the Parquet data to BigQuery, making it available for analysis.
 
 ## Pre-Requisites
 
@@ -22,11 +35,11 @@ After creating the Google Cloud Account you will need pass trough some steps
 
 - Step 1 : [Create a service account key](https://youtu.be/dj9fxiuz4WM?t=66)
 
-- Step 2 : at terraform directory, if not created, create a directory inside of it called `credentials`, and save the service account key with the name of `suzano-challenge.json`, or change the key name.
+- Step 2 : Navigate to the terraform directory. Create a credentials folder inside it (if it doesn’t already exist). Save the service account key file in this directory with the name `suzano-challenge.json`, or update the configuration to match your filename.
 
-- Step 3 : Modify the file `config.yaml` at the main directory with the respective data of your project
+- Step 3 : Modify the file `config.yaml` file in the root directory with your project-specific details.
 
-- Step 4 : install make to run Makefile's
+- Step 4 : Install `make` to run the provided Makefile commands:
 
     ```
     sudo apt -y install make
@@ -52,5 +65,3 @@ Step 3 - Enter at airflow in the IP Address that'll appear at your CMD like `35.
 
 Step 4 - Run the suzano_challenge dag
 
-## Pipeline
-The DAG invoke the Cloud Run API to make the extraction with selenium and requets, and then save this data at Cloud Storage. After saving at Cloud Storage as Parquet, the DAG writes the Tables at BigQuery for the analysis.
