@@ -9,15 +9,12 @@ from api.targets.bigquery import BigQuery
 from api.targets.cloud_storage import CloudStorage
 from api.utils.config import load_config
 
-# import os
-
 
 scraper = APIRouter()
 
 
 @scraper.get("/")
 def root():
-    # def main():
     config = load_config()
 
     today = datetime.now().strftime("%Y-%m-%d")
@@ -56,7 +53,4 @@ def root():
 app = FastAPI()
 
 app.include_router(scraper, prefix="/scraper")
-
-# if __name__ == "__main__":
-#     main()
 
