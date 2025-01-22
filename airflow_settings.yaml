@@ -7,15 +7,15 @@
 
 airflow:
   connections:
-    - conn_id:
-      conn_type:
-      conn_host:
-      conn_schema:
-      conn_login:
-      conn_password:
-      conn_port:
-      conn_extra:
-        example_extra_field: example-value
+    - conn_id: scraper_cloud_run_extraction
+      conn_type: http
+      conn_host: https://economicdataextractiion-135061216385.us-central1.run.app
+      # conn_schema:
+      # conn_login:
+      # conn_password:
+      # conn_port:
+      # conn_extra:
+      #   example_extra_field: example-value
   pools:
     - pool_name:
       pool_slot:
