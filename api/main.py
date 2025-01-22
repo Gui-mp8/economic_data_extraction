@@ -59,3 +59,4 @@ app.include_router(scraper, prefix="/scraper")
 
 # if __name__ == "__main__":
 #     main()
+
