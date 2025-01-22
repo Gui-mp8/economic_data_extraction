@@ -1,11 +1,11 @@
 provider "google" {
-  credentials = file("./credentials/suzano-challenge.json")
+  credentials = var.google_credentials
   project     = var.project_id
   region      = var.region
 }
 
 provider "google-beta" {
-  credentials = file("./credentials/suzano-challenge.json")
+  credentials = var.google_credentials
   project     = var.project_id
   region      = var.region
 }
