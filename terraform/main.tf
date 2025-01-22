@@ -26,6 +26,7 @@ module "project-services" {
     "run.googleapis.com",
     "cloudbuild.googleapis.com",
     "servicemanagement.googleapis.com",
+    "compute.googleapis.com"
   ]
 }
 

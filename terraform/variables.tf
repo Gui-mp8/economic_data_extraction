@@ -2,14 +2,14 @@ variable "project_id" {
   default = "suzano-challenge-teste1"
   type = string
 }
-variable "region" { 
+variable "region" {
   default = "us-central1"
   type = string
 }
 
 # Bucket variables
 variable "bucket_name_suzano" {
-  default = "tf-suzano-challenge-bucket-teste"
+  default = "tf-suzano-challenge"
   type = string
 }
 variable "bucket_location" {
