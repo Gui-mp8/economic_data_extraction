@@ -26,7 +26,8 @@ module "project-services" {
     "run.googleapis.com",
     "cloudbuild.googleapis.com",
     "servicemanagement.googleapis.com",
-    "compute.googleapis.com"
+    "compute.googleapis.com",
+    "bigquery.googleapis.com"
   ]
 }
 
@@ -112,6 +113,13 @@ resource "google_project_iam_member" "airflow_sa_storage" {
   project =  var.project_id
   role    = "roles/storage.objectAdmin"
   member  = "serviceAccount:${google_service_account.airflow_sa.email}"
+}
+
+module "bigquery" {
+  source = "./bigquery"
+  service_account = google_service_account.cloudbuild_service_account.email
+  region = var.region
+  depends_on = [ google_service_account.cloudbuild_service_account ]
 }
 module "compute_engine" {
   source = "./compute_engine"
