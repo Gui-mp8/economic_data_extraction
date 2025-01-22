@@ -29,3 +29,22 @@ astro_start:
 
 astro_stop:
 	sudo astro dev stop
+
+
+# CI
+sort-imports:
+	isort ./api
+
+format:
+	black ./api
+
+lint:
+	ruff check ./api --ignore F401
+
+test:
+	pytest -v tests/
+
+CI:
+	make sort-imports
+	make format
+	make lint

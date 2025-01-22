@@ -10,3 +10,7 @@ fastparquet==2024.11.0
 pandas==2.2.3
 fsspec==2024.12.0
 pyarrow==19.0.0
+isort==5.13.2
+black==24.10.0
+ruff==0.9.2
+pytest==8.3.4

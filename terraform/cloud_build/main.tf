@@ -32,13 +32,14 @@ resource "google_cloudbuild_trigger" "build-trigger" {
             name = "gcr.io/google.com/cloudsdktool/cloud-sdk"
             entrypoint = "gcloud"
             args = [
-            "run",
-            "deploy",
-            var.app_name,
-            "--image", "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_repository}/${var.app_name}:$COMMIT_SHA",
-            "--region", var.region,
-            "--platform", "managed",
-            "--allow-unauthenticated"
+                "run",
+                "deploy",
+                var.app_name,
+                "--image", "${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_repository}/${var.app_name}:$COMMIT_SHA",
+                "--region", var.region,
+                "--platform", "managed",
+                "--allow-unauthenticated",
+                "--memory", "1Gi"
             ]
         }
         images = ["${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_repository}/${var.app_name}:$COMMIT_SHA"]

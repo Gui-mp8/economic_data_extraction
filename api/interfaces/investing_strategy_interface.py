@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 
 class InvestingSI(ABC):
     def __init__(self):
@@ -16,4 +17,3 @@ class InvestingSI(ABC):
     @abstractmethod
     def get_data(self, contract: str) -> List[Dict[str, Any]]:
         pass
-

@@ -1,6 +1,7 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 from api.interfaces.investing_strategy_interface import InvestingSI
+
 
 class Scraper:
     def __init__(self, scraper_strategy: InvestingSI) -> None:

@@ -1,14 +1,15 @@
-from typing import List, Dict, Any
 import json
-
-from api.interfaces.investing_strategy_interface import InvestingSI
-from api.contracts.bloomberg_schema import BloombergSchema
-from api.contracts.usd_cny_schema import UsdCnySchema
+from typing import Any, Dict, List
 
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+
+from api.contracts.bloomberg_schema import BloombergSchema
+from api.contracts.usd_cny_schema import UsdCnySchema
+from api.interfaces.investing_strategy_interface import InvestingSI
+
 
 class SeleniumInvestingStrategy(InvestingSI):
 
@@ -70,22 +71,22 @@ class SeleniumInvestingStrategy(InvestingSI):
             for item in json_data["data"]:
                 if contract == "bloomberg":
                     contract_data = BloombergSchema(
-                        date    = item.get("rowDateTimestamp", ""),
-                        close   = item.get("last_close", ""),
-                        open    = item.get("last_open", ""),
-                        high    = item.get("last_max", ""),
-                        low     = item.get("last_min", ""),
-                        volume  = item.get("volumeRaw", "")
+                        date=item.get("rowDateTimestamp", ""),
+                        close=item.get("last_close", ""),
+                        open=item.get("last_open", ""),
+                        high=item.get("last_max", ""),
+                        low=item.get("last_min", ""),
+                        volume=item.get("volumeRaw", ""),
                     )
 
                 if contract == "usd_cny":
                     contract_data = UsdCnySchema(
-                        date    = item.get("rowDateTimestamp", ""),
-                        close   = item.get("last_close", ""),
-                        open    = item.get("last_open", ""),
-                        high    = item.get("last_max", ""),
-                        low     = item.get("last_min", ""),
-                        volume  = item.get("volumeRaw", "")
+                        date=item.get("rowDateTimestamp", ""),
+                        close=item.get("last_close", ""),
+                        open=item.get("last_open", ""),
+                        high=item.get("last_max", ""),
+                        low=item.get("last_min", ""),
+                        volume=item.get("volumeRaw", ""),
                     )
 
                 validated_data.append(contract_data.model_dump())
