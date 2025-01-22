@@ -97,16 +97,27 @@ module "cloud_build" {
   ]
 }
 
-resource "google_service_account" "my_service_account" {
+resource "google_service_account" "airflow_sa" {
   account_id   = "airflow"
   display_name = "Airflow Service Account"
 }
 
+resource "google_project_iam_member" "airflow_sa_bigquery" {
+  project = var.project_id
+  role    = "roles/bigquery.admin"
+  member  = "serviceAccount:${google_service_account.airflow_sa.email}"
+}
+
+resource "google_project_iam_member" "airflow_sa_storage" {
+  project =  var.project_id
+  role    = "roles/storage.objectAdmin"
+  member  = "serviceAccount:${google_service_account.airflow_sa.email}"
+}
 module "compute_engine" {
   source = "./compute_engine"
   github_full_repo = var.github_full_repo
   project = var.project_id
-  account = google_service_account.my_service_account.email
+  account = google_service_account.airflow_sa.email
   depends_on = [ module.project-services ]
   #depends_on = [ module.cloud_build, module.artifact_registry, module.cloudstorage ]
 }

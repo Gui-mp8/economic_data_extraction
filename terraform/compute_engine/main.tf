@@ -24,8 +24,9 @@ resource "google_compute_instance" "airflow" {
   tags = ["airflow", "http-server", "https-server"]
 }
 
-resource "google_compute_firewall" "allow_airflow" {
-  name    = "allow-airflow-webserver"
+
+resource "google_compute_firewall" "allow_compute_engine_ports" {
+  name    = "allow-compute-engine-ports"
   network = "default"
 
   allow {
