@@ -40,7 +40,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
                 "--platform", "managed",
                 "--allow-unauthenticated",
                 "--memory", "1Gi",
-                "--service-account", var.service_account
+                "--service-account", "cloudbuild-sa@suzano-challenge-teste1.iam.gserviceaccount.com"
             ]
         }
         images = ["${var.region}-docker.pkg.dev/${var.project_id}/${var.artifact_registry_repository}/${var.app_name}:$COMMIT_SHA"]
