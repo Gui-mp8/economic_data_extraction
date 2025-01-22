@@ -37,3 +37,8 @@ variable "app_name" {
   default = "economicdataextraction"
   type = string
 }
+
+variable "github_full_repo" {
+  default = "https://github.com/Gui-mp8/economic_data_extraction"
+  type = string
+}
