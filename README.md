@@ -61,11 +61,16 @@ make infra_apply
 
 > **OBS:** Wait about 5 minutes to airflow become available
 
-Step 3 - Enter at airflow in the IP Address that'll appear at your CMD like "`35.192.180.114`", and put at the url like this, `http://35.192.180.114:8081`, and then do the login using admin admin
+Step 3 - To trigger the Cloud Build, you need to make any commit and then Pull Request in the api/ directory.
+This step is essential because the Cloud Run's continuous deployment (CD) pipeline is configured through Cloud Build.
 
-Step 4 - It's necessary to get the Cloud Run Aplication URL, and create a [HTTP connection at Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html)
+Step 4 - Enter at airflow in the IP Address that'll appear at your CMD like "`35.192.180.114`",
+and put at the url like this, `http://35.192.180.114:8081`, and then do the login using admin admin
 
-Step 5 - Run the suzano_challenge dag
+Step 5 - It's necessary to get the Cloud Run Aplication URL,
+and create a [HTTP connection at Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html)
+
+Step 6 - Run the suzano_challenge dag
 
 ## Improvements
 - Make the DAG more modular by better separating each function in the code.
