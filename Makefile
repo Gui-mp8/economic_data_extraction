@@ -21,3 +21,11 @@ infra_destroy:
 
 infra_compute_engine:
 	terraform -chdir=./terraform apply -target module.compute_engine
+
+### Astronomer
+astro_start:
+	sudo astro config set webserver.port 8081
+	sudo astro dev start
+
+astro_stop:
+	sudo astro dev stop
