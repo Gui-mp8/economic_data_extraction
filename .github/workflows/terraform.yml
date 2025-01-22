@@ -29,16 +29,6 @@ jobs:
     - name: Initialize Terraform
       run: terraform -chdir=./terraform init
 
-    - name: Destroy Terraform
-      env:
-        TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-      run: terraform -chdir=./terraform destroy
-
-    - name: Validate Terraform
-      env:
-        TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-      run: terraform -chdir=./terraform validate
-
     - name: Plan Terraform
       env:
         TF_VAR_google_credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
