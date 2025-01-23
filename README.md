@@ -82,3 +82,5 @@ Step 6 - Run the suzano_challenge dag
 - Create a Docker container to run on Compute Engine, avoiding potential issues with updates via apt update.
 
 - Save the raw data directly to the storage and authenticate pydantic to save it to the bq (we're authenticating pydantic directly because we think we know that the API won't be changed in the future).
+
+> **Aviso:** Clone o Repositorio e o transform e o salve em outro repositorio publico, no momento não consegui autentificar o github privado pelo terraform.
